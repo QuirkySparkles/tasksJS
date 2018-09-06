@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JavaScript Tasks</title>
+    </head>
+    <body>
+        <div>
+            <h1 style="text-align: center;">JavaScript Tasks</h1>
+            <div>
+                <label>
+                    <b>1. Input length, width and symbol of a board, separated by ", "</b>
+                    <br><br>
+                    <input type="text" id="task1" placeholder="length, width, symbol">
+                </label>
+                <button onclick="task1()">Create a board</button>
+                <br>
+            </div>
+            <div>
+                <p><b>2. Input length and height of each envelope, separate values by ", "</b></p>
+                <label>
+                    Envelope 1
+                    <input type="text" id="task2.1" placeholder="length, height">
+                    <br><br>
+                </label>
+                <label>
+                    Envelope 2
+                    <input type="text" id="task2.2" placeholder="length, height">
+                </label>
+                <br><br>
+                <button onclick="task2()">Calculate</button>
+                <br><br>
+            </div>
+            <div>
+                <label>
+                    <b>3. Input name and length of each triangle's sides, separated by ", "</b>
+                    <br><br>
+                    <input type="text" id="task3" placeholder="name, side, ...">
+                    <button onclick="getTriangle()">Add</button>
+                    <button onclick="getTriangle('cancel')">Cancel</button>
+                    <br><br>
+                    <button onclick="task3()">Calculate</button>
+                    <p id="triangle-info"></p>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <b>4. Input a number to check for palindrome</b>
+                    <br><br>
+                    <input type="number" id="task4" placeholder="Your number">
+                </label>
+                <button onclick="task4()">Check</button>
+                <br>
+            </div>
+            <div>
+                <p><b>5. Input range of tickets, separate values by ", "</b></p>
+                <label>
+                    Ticket range
+                    <input type="text" id="task5" placeholder="min, max">
+                    <br><br>
+                </label>
+                <button onclick="task5()">Calculate</button>
+                <br>
+            </div>
+            <div>
+                <p><b>6. Input length and square separated by ", "</b></p>
+                <label>
+                    <input type="text" id="task6" placeholder="length, square">
+                    <br><br>
+                </label>
+                <button onclick="task6()">Calculate</button>
+                <br>
+            </div>
+            <div>
+                <p><b>7. Input range of sequence (min and max) or its length</b></p>
+                <label>
+                    <input type="text" id="task7" placeholder="min, max or length">
+                    <br><br>
+                </label>
+                <button onclick="task7()">Calculate</button>
+                <br>
+            </div>
+        </div>
+        
+        <script src="main.js"></script>
+        <script src="src/task1.js"></script>
+        <script src="src/task2.js"></script>
+        <script src="src/task3.js"></script>
+        <script src="src/task4.js"></script>
+        <script src="src/task5.js"></script>
+        <script src="src/task6.js"></script>
+        <script src="src/task7.js"></script>
+    </body>
+</html>
