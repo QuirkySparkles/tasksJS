@@ -12,7 +12,7 @@ function luckyTickets(context) {
     let simple = 0;
     let hard = 0;
     
-    while(currentVal < context.max) {
+    while(currentVal <= context.max) {
         // simple method
         let currTicket = String(currentVal);
         
@@ -59,19 +59,13 @@ function validateInput(context) {
         return false;
     }
         
-    if (typeof(context.min) !== "number"
-        || context.min < 0
-        || isNaN(context.min)
-        || !isFinite(context.min)
-        || context.min >= context.max) {
+    if (!isNumber(context.min) || context.min >= context.max) {
         return false;
     }
     
-    if (typeof(context.max) !== "number"
-        || context.max > 999999
-        || isNaN(context.max)
-        || !isFinite(context.max)) {
+    if (!isNumber(context.max) || context.max > 999999) {
         return false;
     }
+    
     return true;
 }

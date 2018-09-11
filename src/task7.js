@@ -30,6 +30,7 @@ function fiboRange(context) {
             
             if (String(fibo[fibo.length - 1]).length === context.length) {
                 result.push(fibo[fibo.length - 1]);
+                continue;
             }
             
             if (String(fibo[fibo.length - 1]).length > context.length) {
@@ -61,13 +62,8 @@ function validateCondition(parameter) {
     }
     
     for(let key in parameter) {
-       if (key === "max" || key === "min" || key === "length") {
-           let check1 = typeof(parameter[key]) !== "number";
-           let check2 = !isFinite(parameter[key]);
-           let check3 = parameter[key] < 0;
-           if (check1 || check2 || check3) {
-               return false;
-           }
+       if (!isNumber(parameter[key]) || parameter[key] === 0) {
+           return false;
        }
     }
 

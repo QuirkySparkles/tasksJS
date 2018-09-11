@@ -1,12 +1,12 @@
-function checkPalindrome(toCheck) {    
-    if (!validateNumber(toCheck)) {
+function checkPalindrome(numberToCheck) {    
+    if (!isNumber(numberToCheck) || numberToCheck < 10) {
         return {
             status: "failed",
             reason: "Enter a number to check for palindrome"
         };
     }
     
-    let stringValue = String(toCheck);
+    let stringValue = String(numberToCheck);
     
     for(let i = 0; i < stringValue.length; i++) {
         let j = stringValue.length;
@@ -27,16 +27,4 @@ function checkPalindrome(toCheck) {
         }
     }
     return 0;
-}
-
-function validateNumber(number) {
-    if (!number || typeof(number) !== "number") {
-        return false;
-    }
-    
-    if (isNaN(number) || !isFinite(number) || number < 10) {
-        return false;
-    }
-    
-    return true;
 }

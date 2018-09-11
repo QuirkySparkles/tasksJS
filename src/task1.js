@@ -1,12 +1,13 @@
 function printChessBoard(length, width, symbol) {
+    const instruction = {
+        status: "failed",
+        reason: "Call the function with following parameters: length - length of a board (positive integer); width - width of a board (positive integer); symbol - symbol that will be used for drawing a board (must be a symbol of a string)"
+    };
+    
     if (checkInput(length, "length")
        || checkInput(width, "width")
        || checkInput(symbol, "symbol")) { //validateInput
-        console.log({
-            status: "failed",
-            reason: "Call the function with following parameters: length - length of a board (positive integer); width - width of a board (positive integer); symbol - symbol that will be used for drawing a board (must be a symbol of a string)"
-        });
-        return;
+        return instruction;
     }
 
     let chessBoard = "";
@@ -17,18 +18,15 @@ function printChessBoard(length, width, symbol) {
             chessBoard += (`${symbol} `.repeat(length)) + "\n";
         }
     }
-    console.log(chessBoard);
+    
     return chessBoard;
 }
 
 function checkInput(argument, argumentName) {
     if(argumentName !== "symbol") {
-        return (!argument
-                || typeof(argument) !== "number"
-                || argument <= 0
-                || !isFinite(argument)
-                || isNaN(argument)
-               );
+        if (!isNumber(argument) || argument === 0) {
+            return true;
+        }
     } else {
         return !argument || argument.length !== 1;
     }

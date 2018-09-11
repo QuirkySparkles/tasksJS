@@ -3,7 +3,8 @@ function task1() {
     const length = +inputParams[0];
     const width = +inputParams[1];
     const symbol = inputParams[2];
-    return printChessBoard(length, width, symbol);
+    const result = printChessBoard(length, width, symbol);
+    showResult(result);
 }
 
 function task2() {
@@ -17,8 +18,8 @@ function task2() {
         length: +envelopeValues2[0],
         height: +envelopeValues2[1]
     }
-    
-    console.log(envelopeAnalysis(envelope1, envelope2));
+    const result = envelopeAnalysis(envelope1, envelope2);
+    showResult(result);
 }
 
 let task3Triangles = [];
@@ -48,13 +49,23 @@ function getTriangle(cancel) {
     
     let triangle = document.getElementById("task3").value.split(", ");
     document.getElementById("task3").value = "";
+    const currentTriangle = new Triangle(triangle[0], +triangle[1], +triangle[2], +triangle[3]);
+    const p = (currentTriangle.a + currentTriangle.b + currentTriangle.c) / 2;
+    const triangleArea = Math.sqrt(p * (p - currentTriangle.a) * (p - currentTriangle.b) * (p - currentTriangle.c));
+    
+    if (!triangleArea) {
+        document.getElementById("result").innerHTML = "This triangle doesn't exist!";
+        return;
+    }
+    
+    task3Triangles.push(currentTriangle);
     addedTriangles.push(triangle[0]);
-    task3Triangles.push(new Triangle(triangle[0], +triangle[1], +triangle[2], +triangle[3]));
     info.innerHTML = addedTriangles.join(", ");
 }
 
 function task3() {
-    console.log(sortTriangles(task3Triangles));
+    const result = sortTriangles(task3Triangles);
+    showResult(result);
     task3Triangles = [];
     addedTriangles = [];
     const info = document.getElementById("triangle-info");
@@ -62,7 +73,8 @@ function task3() {
 
 function task4() {
     const number = document.getElementById("task4").value;
-    console.log(checkPalindrome(+number));
+    const result = checkPalindrome(+number);
+    showResult(result);
 }
 
 function task5() {
@@ -71,12 +83,14 @@ function task5() {
         min: +range[0],
         max: +range[1]
     };
-    console.log(luckyTickets(context));
+    const result = luckyTickets(context);
+    showResult(result);
 }
 
 function task6() {
     let input = document.getElementById("task6").value.split(", ");
-    console.log(numericSequence(+input[0], +input[1]));
+    const result = numericSequence(+input[0], +input[1]);
+    showResult(result);
 }
 
 function task7() {
@@ -94,5 +108,6 @@ function task7() {
     } else {
         context.length = +input[0];
     }
-    console.log(fiboRange(context));
+    const result = fiboRange(context);
+    showResult(result);
 }
