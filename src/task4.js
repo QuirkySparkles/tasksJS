@@ -1,30 +1,28 @@
 function checkPalindrome(numberToCheck) {    
-    if (!isNumber(numberToCheck) || numberToCheck < 10) {
+    if (!isNumber(numberToCheck) || numberToCheck <= 10) {
         return {
             status: "failed",
-            reason: "Enter a number to check for palindrome"
+            reason: "Enter a number to check for palindrome. Number must be more than 10"
         };
     }
     
     let stringValue = String(numberToCheck);
+    let i;
+    let result = 0;
     
-    for(let i = 0; i < stringValue.length; i++) {
+    for (i = 0; i < stringValue.length; i++) {
         let j = stringValue.length;
-        while(j > i + 1) {
+        
+        while (j > i + 1) {
             const currentSlice = stringValue.slice(i, j);
-            let firstPart = currentSlice.slice(0, currentSlice.length / 2).split("").reverse().join("");
-            let secondPart = currentSlice.slice(currentSlice.length / 2);
+            let reversedCurrentSlice = currentSlice.slice("").split("").reverse().join("");
             
-            if (currentSlice.length % 2) {        
-                secondPart = secondPart.slice(1);
-            } 
-            
-            if (firstPart === secondPart) {
-                return currentSlice;
+            if (currentSlice === reversedCurrentSlice) {
+                return result = currentSlice;
             }
             
             j--;
         }
     }
-    return 0;
+    return result;
 }

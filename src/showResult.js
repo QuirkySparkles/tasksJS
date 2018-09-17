@@ -1,5 +1,6 @@
 function showResult(result) {
     console.log(result);
+    document.getElementById("instruction").innerHTML = "";
     
     if(Array.isArray(result)) {
         document.getElementById("result").innerHTML = result.join(", ");

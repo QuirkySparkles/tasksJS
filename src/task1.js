@@ -4,30 +4,36 @@ function printChessBoard(length, width, symbol) {
         reason: "Call the function with following parameters: length - length of a board (positive integer); width - width of a board (positive integer); symbol - symbol that will be used for drawing a board (must be a symbol of a string)"
     };
     
-    if (checkInput(length, "length")
-       || checkInput(width, "width")
-       || checkInput(symbol, "symbol")) { //validateInput
+    if (!isInputValid1(length, "length")
+       || !isInputValid1(width, "width")
+       || !isInputValid1(symbol, "symbol")) {
         return instruction;
     }
 
     let chessBoard = "";
-    for(let i = 0; i < width; i++) {
-        if(i % 2) {
-            chessBoard += " " + (`${symbol} `.repeat(length)) + "\n";
-        } else {
-            chessBoard += (`${symbol} `.repeat(length)) + "\n";
-        }
+    let i = 0;
+    const line = (`${symbol} `.repeat(length)) + "\n";
+    
+    while (i < width) {
+        chessBoard += (i % 2) ? (" " + line) : line;
+        i++;
     }
     
     return chessBoard;
 }
 
-function checkInput(argument, argumentName) {
-    if(argumentName !== "symbol") {
+function isInputValid1(argument, argumentName) {
+    let isValid = true;
+    
+    if (argumentName !== "symbol") {
         if (!isNumber(argument) || argument === 0) {
-            return true;
+            isValid = false;
         }
     } else {
-        return !argument || argument.length !== 1;
+        if (!argument || argument.length !== 1) {
+            isValid = false;
+        }
     }
+    
+    return isValid;
 }

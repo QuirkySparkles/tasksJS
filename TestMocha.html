@@ -1,0 +1,39 @@
+<html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+    <script>
+        mocha.setup('bdd');
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+    <script>
+        const assert = chai.assert;
+    </script>
+</head>
+
+
+
+<body>
+    <div id="mocha"></div>
+    <script src="tests/testTask1.js"></script>
+    <script src="tests/testTask2.js"></script>
+    <script src="tests/testTask3.js"></script>
+    <script src="tests/testTask4.js"></script>
+    <script src="tests/testTask5.js"></script>
+    <script src="tests/testTask6.js"></script>
+    <script src="tests/testTask7.js"></script>
+    <script src="tests/testIsNumber.js"></script>
+    <script src="src/task1.js"></script>
+    <script src="src/task2.js"></script>
+    <script src="src/task3.js"></script>
+    <script src="src/task4.js"></script>
+    <script src="src/task5.js"></script>
+    <script src="src/task6.js"></script>
+    <script src="src/task7.js"></script>
+    <script src="src/isNumber.js"></script>
+    <script>
+        mocha.run();
+    </script>
+</body>
+</html>

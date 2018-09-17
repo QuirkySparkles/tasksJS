@@ -1,46 +1,39 @@
+const ticketNumberLength = 6;
+
 function luckyTickets(context) {
     const instruction = {
         status: "failed",
-        reason: "Input an object with two positive numeric properties: 'min' and 'max', max > min, max <= 999999"
+        reason: "Input an object with two string properties 'min' and 'max', with ticket format numbers. max > min, max <= 999999"
     };
     
-    if (!validateInput(context)) {
+    if (!isInputValid5(context)) {
         return instruction;
     }
     
-    let currentVal = context.min;
+    context.min = Number(context.min);
+    context.max = Number(context.max);
+    
+    let currentValue = context.min;
     let simple = 0;
     let hard = 0;
+    let result;
     
-    while(currentVal <= context.max) {
-        // simple method
-        let currTicket = String(currentVal);
+    while (currentValue <= context.max) {
+        let currentTicket = String(currentValue);
         
-        if (currTicket.length < 6) {
-            currTicket = "0".repeat(6 - currTicket.length) + currTicket;
+        if (currentTicket.length < ticketNumberLength) {
+            currentTicket = "0".repeat(ticketNumberLength - currentTicket.length) + currentTicket;
         }
         
-        currTicket = currTicket.split("").map(number => +number);
+        const ticketArray = currentTicket.split("").map(number => Number(number));
         
-        if (currTicket[0] + currTicket[1] + currTicket[2]
-            === currTicket[3] + currTicket[4] + currTicket[5]) {
-            simple++;
-        }
-        
-        // hard method
-        let evenNumbers = 0;
-        let oddNumbers = 0;
-        currTicket.forEach(number => {
-            (number % 2) ? evenNumbers += number : oddNumbers += number;
-        });
-        
-        if (evenNumbers === oddNumbers) {
-            hard++;
-        }
-        currentVal++;
+        simple += isLuckySimple(ticketArray);
+        hard += isLuckyHard(ticketArray);
+
+        currentValue++;
     }
     
-    let result = {
+    result = {
         simple,
         hard
     };
@@ -54,18 +47,50 @@ function luckyTickets(context) {
     return result;
 }
 
-function validateInput(context) {
+function isLuckySimple(ticket) {    
+    const leftSide = ticket[0] + ticket[1] + ticket[2];
+    const rightSide = ticket[3] + ticket[4] + ticket[5];
+
+    return leftSide === rightSide;
+}
+
+function isLuckyHard(ticket) {
+    let evenNumbers = 0;
+    let oddNumbers = 0;
+    
+    ticket.forEach(number => {
+        (number % 2) ? evenNumbers += number : oddNumbers += number;
+    });
+
+    return evenNumbers === oddNumbers;
+}
+
+function isInputValid5(context) {
+    let isValid = true;
+    
     if (!context || !("min" in context) || !("max" in context)) {
-        return false;
+        return isValid = false;
     }
+    
+    if (typeof(context.min) !== "string" || typeof(context.max) !== "string") {
+        return isValid = false;
+    }
+    
+    if (context.min.length !== ticketNumberLength
+        || context.max.length !== ticketNumberLength) {
+        isValid = false;
+    }
+    
+    const minNumber = Number(context.min);
+    const maxNumber = Number(context.max);
         
-    if (!isNumber(context.min) || context.min >= context.max) {
-        return false;
+    if (!isNumber(minNumber) || minNumber >= maxNumber || minNumber === 0) {
+        isValid = false;
     }
     
-    if (!isNumber(context.max) || context.max > 999999) {
-        return false;
+    if (!isNumber(maxNumber) || maxNumber > 999999) {
+        isValid = false;
     }
     
-    return true;
+    return isValid;
 }
