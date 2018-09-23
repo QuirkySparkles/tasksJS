@@ -1,5 +1,6 @@
 describe("3. Test task 3", function() {
     const abc = {vertices: "ABC", a: 17, b: 12, c: 10};
+    const tmp = {vertices: "TMP", a: 12, b: 12, c: 5};
 	describe("sortTriangles", function() {
         let instruction = {
             status: "failed",
@@ -7,7 +8,6 @@ describe("3. Test task 3", function() {
         };
         
         const qlt = {vertices: "QLT", a: 20, b: 14, c: 12};
-        const tmp = {vertices: "TMP", a: 12, b: 12, c: 5};
         const fer = {vertices: "FER", a: 20, b: 12, c: 15};
 
 		it ("Sorts triangles in order of descending triangle's area", function() {
@@ -38,8 +38,9 @@ describe("3. Test task 3", function() {
     
 	describe("isInputValid3", function() {
         it ("Should validate if value is an array that contains objects of triangles with properties: 'vertices' (string), and three sides (positive number).", function() {
-            const tmp = {vertices: "TMP", a: 12, b: 12, c: 5};
-            assert.isTrue(isInputValid3([tmp, tmp, tmp]));
+            delete abc.area;
+            delete tmp.area;
+            assert.isTrue(isInputValid3([abc, tmp]));
         });
         
         it ("Shouldn't validate if value isn't an array", function() {

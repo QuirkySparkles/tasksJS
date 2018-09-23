@@ -4,9 +4,8 @@ function sortTriangles(trianglesArray) {
         reason: "An array of triangle objects must be provided. Object must consist of 4 properties: 'vertices' - name of the triangle and three sides of the triangle as numbers. "
     };
     let result = [];
-    const isDataValid = isInputValid3(trianglesArray);
     
-    if (!isDataValid) {
+    if (!isInputValid3(trianglesArray)) {
         return instruction;
     }
     

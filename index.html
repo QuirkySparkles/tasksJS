@@ -3,19 +3,12 @@
     <head>
         <meta charset="utf-8">
         <title>JavaScript Tasks</title>
-        <style>
-            .task {
-                display: none;
-            }
-            li:hover {
-                color: deeppink;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
-        <div>
-            <h1 style="text-align: center;">JavaScript Tasks</h1>
-            <ul style="line-height: 1.5;">
+        <div class="main">
+            <h1>JavaScript Tasks</h1>
+            <ul>
                 <li>Task 1</li>
                 <li>Task 2</li>
                 <li>Task 3</li>
@@ -25,21 +18,23 @@
                 <li>Task 7</li>
             </ul>
             <div id="t1" class="task">
+                <h3>Chess board</h3>
                 <label>
-                    <b>1. Input length, width and symbol of a board, separated by ", "</b>
-                    <br><br>
+                    <b>Input length, width and symbol of a board, separated by ", "</b>
+                    <br>
                     <input type="text" id="task1" placeholder="length, width, symbol">
                 </label>
                 <br><br>
                 <button id="t1-button">Create a board</button>
-                <br>
             </div>
             <div id="t2" class="task">
-                <p><b>2. Input length and height of each envelope, separate values by ", "</b></p>
+                <h3>Compare envelopes</h3>
+                <b>Input length and height of each envelope, separate values by ", "</b>
+                <br>
                 <label>
                     Envelope 1
                     <input type="text" id="task2.1" placeholder="length, height">
-                    <br><br>
+                    <br>
                 </label>
                 <label>
                     Envelope 2
@@ -47,59 +42,61 @@
                 </label>
                 <br><br>
                 <button id="t2-button">Calculate</button>
-                <br><br>
             </div>
             <div id="t3" class="task">
-                <label>
-                    <b>3. Input name and length of each triangle's sides, separated by ", "</b>
-                    <br><br>
-                    <input type="text" id="task3" placeholder="name, side, ...">
-                    <button class="manage-triangles">Add</button>
-                    <button class="manage-triangles">Cancel</button>
-                    <br><br>
-                    <button id="t3-button">Calculate</button>
-                    <p id="triangle-info"></p>
-                </label>
+                <h3>Sort triangles</h3>
+                <b>Input name and length of each triangle's sides</b>
+                <br>
+                <input type="text" id="vertices" class="triangle-input" placeholder="name">
+                <input type="number" id="a-side" class="triangle-input" placeholder="a">
+                <input type="number" id="b-side" class="triangle-input" placeholder="b">
+                <input type="number" id="c-side" class="triangle-input" placeholder="c">
+                <button class="manage-triangles">Add</button>
+                <button class="manage-triangles">Cancel</button>
+                <p id="triangle-info"></p>
+                <br>
+                <button id="t3-button">Calculate</button>
             </div>
             <div id="t4" class="task">
+                <h3>Palindrome</h3>
                 <label>
-                    <b>4. Input a number to check for palindrome</b>
-                    <br><br>
+                    <b>Input a number to check for palindrome</b>
+                    <br>
                     <input type="number" id="task4" placeholder="Your number">
                 </label>
                 <br><br>
                 <button id="t4-button">Check</button>
-                <br>
             </div>
             <div id="t5" class="task">
-                <p><b>5. Input range of tickets, separate values by ", "</b></p>
-                <label>
-                    Ticket range
-                    <input type="text" id="task5" placeholder="min, max">
-                    <br><br>
-                </label>
-                <button id="t5-button">Calculate</button>
+                <h3>Lucky tickets</h3>
+                <b>5. Input range of tickets</b>
                 <br>
+                <input type="text" id="min-ticket" class="small-input" placeholder="min">
+                <input type="text" id="max-ticket" class="small-input" placeholder="max">
+                <br><br>
+                <button id="t5-button">Calculate</button>
             </div>
             <div id="t6" class="task">
-                <p><b>6. Input length and square separated by ", "</b></p>
-                <label>
-                    <input type="text" id="task6" placeholder="length, square">
-                    <br><br>
-                </label>
-                <button id="t6-button">Calculate</button>
+                <h3>Square sequence</h3>
+                <b>Input length and square</b>
                 <br>
+                <input type="number" id="t6-length" class="small-input" placeholder="length">
+                <input type="number" id="t6-square" class="small-input" placeholder="square">
+                <br><br>
+                <button id="t6-button">Calculate</button>
             </div>
             <div id="t7" class="task">
-                <p><b>7. Input range of sequence (min and max) or its length</b></p>
                 <label>
+                    <h3>Fibo sequence</h3>
+                    <b>Input range of sequence (min and max) or its length</b>
+                    <br>
                     <input type="text" id="task7" placeholder="min, max or length">
                     <br><br>
                 </label>
                 <button id="t7-button">Calculate</button>
-                <br>
             </div>
-            <pre><p id="result" style="max-width: 500px;"></p></pre>
+            <pre class="board-result"></pre>
+            <p id="result"></p>
             <p id="instruction"></p>
         </div>
         

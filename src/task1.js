@@ -15,7 +15,7 @@ function printChessBoard(length, width, symbol) {
     const line = (`${symbol} `.repeat(length)) + "\n";
     
     while (i < width) {
-        chessBoard += (i % 2) ? (" " + line) : line;
+        chessBoard += (i % 2) ? ("  " + line) : line;
         i++;
     }
     

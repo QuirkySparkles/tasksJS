@@ -16,6 +16,7 @@ function injectEventListeners() {
 }
 
 injectEventListeners();
+displayTask("t1");
 
 function task1() {
     let inputParams = document.getElementById("task1").value.split(", ");
@@ -23,7 +24,12 @@ function task1() {
     const width = parseInt(inputParams[1]);
     const symbol = inputParams[2];
     const result = printChessBoard(length, width, symbol);
-    showResult(result);
+    
+    if (typeof(result) === "string") {
+        document.querySelector(".board-result").innerHTML = "Result: \n" + result;
+    } else {
+        showResult(result);
+    }
 }
 
 function task2() {
@@ -62,16 +68,19 @@ function getTriangle(cancel) {
         }
     }
     
-    if (!document.getElementById("task3").value) {
-        return;
-    }
-    
-    let triangle = document.getElementById("task3").value.split(", ");
-    document.getElementById("task3").value = "";
-    const currentTriangle = new Triangle(triangle[0], parseFloat(triangle[1]), parseFloat(triangle[2]), parseFloat(triangle[3]));
+    let vertices = document.getElementById("vertices");
+    let aSide = document.getElementById("a-side");
+    let bSide = document.getElementById("b-side");
+    let cSide = document.getElementById("c-side");
+    const currentTriangle = new Triangle(vertices.value, parseFloat(aSide.value), parseFloat(bSide.value), parseFloat(cSide.value));
     const {a, b, c} = currentTriangle;
     const p = (a + b + c) / 2;
     const triangleArea = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    
+    vertices.value = "";
+    aSide.value = "";
+    bSide.value = "";
+    cSide.value = "";
     
     if (!triangleArea || a <= 0 || b <= 0 || c <= 0) {
         document.getElementById("result").innerHTML = "This triangle doesn't exist!";
@@ -81,7 +90,7 @@ function getTriangle(cancel) {
     document.getElementById("result").innerHTML = "";
     
     task3Triangles.push(currentTriangle);
-    addedTriangles.push(triangle[0]);
+    addedTriangles.push(currentTriangle.vertices);
     info.innerHTML = addedTriangles.join(", ");
 }
 
@@ -99,18 +108,20 @@ function task4() {
 }
 
 function task5() {
-    let range = document.getElementById("task5").value.split(", ");
+    let minTicket = document.getElementById("min-ticket").value;
+    let maxTicket = document.getElementById("max-ticket").value;
     const context = {
-        min: range[0],
-        max: range[1]
+        min: minTicket,
+        max: maxTicket
     };
     const result = luckyTickets(context);
     showResult(result);
 }
 
 function task6() {
-    let input = document.getElementById("task6").value.split(", ");
-    const result = numericSequence(Number(input[0]), parseFloat(input[1]));
+    let sequenceLength = document.getElementById("t6-length").value;
+    let maxSquare = document.getElementById("t6-square").value;
+    const result = numericSequence(Number(sequenceLength), parseFloat(maxSquare));
     showResult(result);
 }
 

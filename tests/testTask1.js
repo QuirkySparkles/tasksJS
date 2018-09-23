@@ -6,11 +6,11 @@ describe("1. Test task 1", function() {
 		};
 
 		it ("Is chess board 2x2 with '*' printing?", function() {
-			assert.equal(printChessBoard(2, 2, "*"), "* * \n * * \n");
+			assert.equal(printChessBoard(2, 2, "*"), "* * \n  * * \n");
 		});
 
 		it ("Is chess board 3x3 with '$' printing?", function() {
-			assert.equal(printChessBoard(3, 3, "$"), "$ $ $ \n $ $ $ \n$ $ $ \n");
+			assert.equal(printChessBoard(3, 3, "$"), "$ $ $ \n  $ $ $ \n$ $ $ \n");
 		});
 
         for (let i = 0; i > -2; i--) {
