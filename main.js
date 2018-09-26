@@ -8,7 +8,7 @@ function injectEventListeners() {
         elementId = `t${i}-button`;
         document.getElementById(elementId).addEventListener("click", eventListeners[i]);
         elementId = "";
-        document.querySelector(`li:nth-child(${i})`).addEventListener("click", displayTask.bind(null,`t${i}`));
+        document.querySelector(`#navbar div:nth-child(${i})`).addEventListener("click", displayTask.bind(null,`t${i}`));
     }
 
     triangleManagement.item(0).addEventListener("click", getTriangle.bind(null, ""));
@@ -50,8 +50,18 @@ function task2() {
 let task3Triangles = [];
 let addedTriangles = [];
 
+class Triangle {
+    constructor(vertices, a, b, c) {
+        this.vertices = vertices;
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+}
+
 function getTriangle(cancel) {
     const info = document.getElementById("triangle-info");
+    
     if (cancel) {
         task3Triangles.pop();
         addedTriangles.pop();
@@ -59,31 +69,18 @@ function getTriangle(cancel) {
         return;
     }
     
-    class Triangle {
-        constructor(vertices, a, b, c) {
-            this.vertices = vertices;
-            this.a = a;
-            this.b = b;
-            this.c = c;
-        }
-    }
-    
     let vertices = document.getElementById("vertices");
     let aSide = document.getElementById("a-side");
     let bSide = document.getElementById("b-side");
     let cSide = document.getElementById("c-side");
     const currentTriangle = new Triangle(vertices.value, parseFloat(aSide.value), parseFloat(bSide.value), parseFloat(cSide.value));
-    const {a, b, c} = currentTriangle;
-    const p = (a + b + c) / 2;
-    const triangleArea = Math.sqrt(p * (p - a) * (p - b) * (p - c));
     
     vertices.value = "";
     aSide.value = "";
     bSide.value = "";
     cSide.value = "";
     
-    if (!triangleArea || a <= 0 || b <= 0 || c <= 0) {
-        document.getElementById("result").innerHTML = "This triangle doesn't exist!";
+    if (!triangleValidation(currentTriangle)) {
         return;
     }
     
@@ -91,7 +88,7 @@ function getTriangle(cancel) {
     
     task3Triangles.push(currentTriangle);
     addedTriangles.push(currentTriangle.vertices);
-    info.innerHTML = addedTriangles.join(", ");
+    info.innerHTML = "Added triangles: " + addedTriangles.join(", ");
 }
 
 function task3() {

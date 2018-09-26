@@ -37,12 +37,8 @@ function isInputValid3(triangles) {
         if (typeof(triangle) !== "object" || Object.keys(triangle).length !== 4) {
             return isValid = false;
         }
-
-        if (!("vertices" in triangle)) {
-            isValid = false;
-        }
         
-        if (typeof(triangle.vertices) !== "string" || !triangle.vertices.trim()) {
+        if (typeof(triangle.vertices) !== "string") {
             isValid = false;
         }
 
@@ -51,7 +47,7 @@ function isInputValid3(triangles) {
                 continue;
             }
             
-            if (!isNumber(triangle[key]) || (triangle[key] === 0)) {
+            if (!isNumber(triangle[key])) {
                 isValid = false;
             }
         }

@@ -1,6 +1,6 @@
 .main {
     font-family: sans-serif;
-    width: 70%;
+    width: 80%;
     margin: 5% auto 0;
 }
 
@@ -14,26 +14,26 @@ p {
     margin: 0 auto;
 }
 
-ul {
-    width: 80%;
+#navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     line-height: 1.5;
     list-style-type: none;
-    margin: 0 auto;
-    padding: 0;
     overflow: hidden;
     text-align: center;
 }
 
-li {
+.navbar {
     float: left;
     font-size: 20px;
-    padding: 0 10px;
+    padding: 0 20px;
     border: 2px solid #001e4f;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 }
 
-li:hover {
+.navbar:hover {
     cursor: pointer;
 }
 
@@ -41,7 +41,14 @@ h3 {
     text-align: center;
 }
 
+.tasks {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
 .task {
+    max-width: 600px;
     width: 70%;
     margin: 0 auto 10px;
     display: none;
@@ -76,6 +83,10 @@ input:focus {
 
 .task button:last-child {
     margin-left: 37%;
+}
+
+.manage-triangles {
+    margin-left: 20px;
 }
 
 #t3-button {

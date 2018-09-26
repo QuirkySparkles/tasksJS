@@ -1,17 +1,21 @@
 describe("3. Test task 3", function() {
-    const abc = {vertices: "ABC", a: 17, b: 12, c: 10};
-    const tmp = {vertices: "TMP", a: 12, b: 12, c: 5};
+    let abc = {vertices: "ABC", a: 17, b: 12, c: 10};
+    let tmp = {vertices: "TMP", a: 12.8, b: 12.14, c: 5};
+    
 	describe("sortTriangles", function() {
+        
+        afterEach(() => abc = { vertices: "ABC", a: 17, b: 12, c: 10 });
+        
         let instruction = {
             status: "failed",
             reason: "An array of triangle objects must be provided. Object must consist of 4 properties: 'vertices' - name of the triangle and three sides of the triangle as numbers. "
         };
         
-        const qlt = {vertices: "QLT", a: 20, b: 14, c: 12};
+        const def = {vertices: "DEF", a: 20, b: 14, c: 12};
         const fer = {vertices: "FER", a: 20, b: 12, c: 15};
 
 		it ("Sorts triangles in order of descending triangle's area", function() {
-			assert.deepEqual(sortTriangles([abc, qlt, tmp, fer]), ["FER", "QLT", "ABC", "TMP"]);
+			assert.deepEqual(sortTriangles([abc, def, tmp, fer]), ["FER", "DEF", "ABC", "TMP"]);
 		});
         
 		it ("Returns instruction if no triangles provided", function() {
@@ -23,20 +27,25 @@ describe("3. Test task 3", function() {
 		});
         
 		it ("Returns instruction if an array contains wrong objects of triangles", function() {
-			assert.deepEqual(sortTriangles([abc, {vertices: "DRC", a: 17, c: 10}]), instruction);
+            delete abc.c;
+			assert.deepEqual(sortTriangles([abc, def]), instruction);
 		});
     
 		it ("Returns instruction if an object of triangle has negative side", function() {
-			assert.deepEqual(sortTriangles([{vertices: "ABC", a: -17, b: 12, c: 10}, fer]), instruction);
+            abc.a = -16;
+			assert.deepEqual(sortTriangles([abc, fer]), instruction);
 		});
         
 		it ("Returns instruction if an object of triangle has not numeric side", function() {
-			assert.deepEqual(sortTriangles([{vertices: "ABC", a: 17, b: "number", c: 10}, qlt]), instruction);
+            abc.b = "number";
+			assert.deepEqual(sortTriangles([abc, def]), instruction);
 		});
 
 	});
     
 	describe("isInputValid3", function() {
+        afterEach(() => tmp = {vertices: "TMP", a: 12.8, b: 12.14, c: 5});
+        
         it ("Should validate if value is an array that contains objects of triangles with properties: 'vertices' (string), and three sides (positive number).", function() {
             delete abc.area;
             delete tmp.area;
@@ -56,34 +65,65 @@ describe("3. Test task 3", function() {
         });
         
         it ("Shouldn't validate if an object contains more than 4 properties", function() {
-			 assert.isFalse(isInputValid3([{vertices: "DHJ", a: 4, b: 4, c: 4, d: 4}]));
+             tmp.d = 6;
+			 assert.isFalse(isInputValid3([tmp]));
         });
         
         it ("Shouldn't validate if an object doesn't contain property 'vertices'", function() {
-			 assert.isFalse(isInputValid3([{a: 4, b: 4, c: 4}]));
+             delete tmp.vertices;
+			 assert.isFalse(isInputValid3([tmp]));
         });
         
         it ("Shouldn't validate if property 'vertices' isn't a string", function() {
-			 assert.isFalse(isInputValid3([{vertices: true, a: 4, b: 4, c: 4}]));
-        });
-        
-        it ("Shouldn't validate if property 'vertices' has an empty string", function() {
-			 assert.isFalse(isInputValid3([{vertices: "", a: 4, b: 4, c: 4}]));
+             tmp.vertices = true;
+			 assert.isFalse(isInputValid3([tmp]));
         });
         
         it ("Shouldn't validate if any of triangle's sides isn't a number", function() {
-			 assert.isFalse(isInputValid3([{vertices: "NBV", a: "4", b: 9, c: 9}]));
+             tmp.a = "7";
+			 assert.isFalse(isInputValid3([tmp]));
         });
         
         it ("Shouldn't validate if any of triangle's sides is a negative number", function() {
-			 assert.isFalse(isInputValid3([{vertices: "NBV", a: 4, b: -9, c: 9}]));
-        });
-        
-        it ("Shouldn't validate if any of triangle's sides is equal to 0", function() {
-			 assert.isFalse(isInputValid3([{vertices: "NBV", a: 4, b: 9, c: 0}]));
+             tmp.b = -9;
+			 assert.isFalse(isInputValid3([tmp]));
         });
         
 	});
+    
+    describe("triangleValidation", function() {
+        let BFI = { vertices: "BFI", a: 9, b: 15, c: 11 };
+        
+        afterEach(() => BFI = { vertices: "BFI", a: 9, b: 15, c: 11 });
+        
+        it ("Should validate if an object with correct triangle's sides and property 'vertices' was provided", function() {
+             assert.isTrue(triangleValidation(BFI));
+        });
+        
+        it ("Shouldn't validate if an object with empty property 'vertices' was provided", function() {
+             BFI.vertices = "";
+             assert.isFalse(triangleValidation(BFI));
+        });
+        
+        it ("Shouldn't validate any of triangle's sides is equal to 0", function() {
+             BFI.a = 0;
+             assert.isFalse(triangleValidation(BFI));
+        });
+        
+        it ("Shouldn't validate any of triangle's sides is equal to 0", function() {
+             BFI.b = 0;
+             assert.isFalse(triangleValidation(BFI));
+        });
+        
+        it ("Shouldn't validate any of triangle's sides is less than 0", function() {
+             BFI.a = -5;
+             assert.isFalse(triangleValidation(BFI));
+        });
+        
+        it ("Shouldn't validate if triangle doesn't exist", function() {
+             assert.isFalse(triangleValidation({vertices: "HAI", a: 10, b: 15, c: 30}));
+        });
+    });
     
     describe("getArea", function() {
         it ("Should calculate triangle's area correctly. Sides: 17, 12, 10.", function() {
